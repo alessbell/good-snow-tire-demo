@@ -16,8 +16,7 @@
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "publish": "changeset publish",
-    "release": "npm run build && npm run publish"
+    "release": "npm run build && npx changeset publish"
   },
   "husky": {
     "hooks": {
