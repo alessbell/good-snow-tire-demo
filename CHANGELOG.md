@@ -1,5 +1,19 @@
 # good-snow-tire-demo
 
+## 0.2.0
+
+### Minor Changes
+
+- [#5](https://github.com/alessbell/good-snow-tire-demo/pull/5) [`58606d9`](https://github.com/alessbell/good-snow-tire-demo/commit/58606d9c1333280edd7a81b50de4db578976ee2c) Thanks [@alessbell](https://github.com/alessbell)! - Added subtract function
+
+  This adds the ability to subtract (no pun intended)
+
+### Patch Changes
+
+- [#4](https://github.com/alessbell/good-snow-tire-demo/pull/4) [`3a54d72`](https://github.com/alessbell/good-snow-tire-demo/commit/3a54d72eb38ba4a85917f0f82ec0c9cf35c51bba) Thanks [@alessbell](https://github.com/alessbell)! - Remove dev-only logging: this is an example of another patch PR.
+
+  Testing to see how line breaks look in the CHANGELOG.
+
 ## 0.1.1
 
 ### Patch Changes
