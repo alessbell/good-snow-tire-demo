@@ -37,7 +37,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: npm run ci:version
+          version: npm run release:prerelease
           publish: npm run release
           commit: "chore: Update version for beta release"
           title: "chore: Update version for beta release"
