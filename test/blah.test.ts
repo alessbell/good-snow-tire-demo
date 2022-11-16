@@ -1,4 +1,4 @@
-import { subtract, multiply } from '../src';
+import { subtract, multiply, divide } from '../src';
 
 describe('blah', () => {
   it('also works', () => {
@@ -6,5 +6,8 @@ describe('blah', () => {
   });
   it('also works with multiplication', () => {
     expect(multiply(2, 2)).toEqual(4);
+  });
+  it('also works with division', () => {
+    expect(divide(4, 2)).toEqual(2);
   });
 });
