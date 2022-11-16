@@ -17,7 +17,7 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "release": "sh scripts/release.sh",
-    "prerelease": "sh scripts/prerelease.sh"
+    "release:prerelease": "sh scripts/prerelease.sh"
   },
   "husky": {
     "hooks": {
