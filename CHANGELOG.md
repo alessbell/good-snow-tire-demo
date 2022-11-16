@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 0.2.1
+
+### Patch Changes
+
+- Adds logging to subtract function ([#7](https://github.com/alessbell/good-snow-tire-demo/pull/7))
+
 ## 0.2.0
 
 ### Minor Changes
