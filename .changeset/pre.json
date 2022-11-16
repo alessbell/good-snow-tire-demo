@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "good-snow-tire-demo": "1.1.0"
+  },
+  "changesets": [
+    "smooth-kangaroos-thank"
+  ]
+}
