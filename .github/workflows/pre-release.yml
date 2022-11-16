@@ -3,14 +3,15 @@ name: 🦄 Changesets Pre-Release (beta)
 on:
   push:
     branches:
-      - release
       - "release-*"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
+  prerelease:
     name: 🦄 Changesets Pre-Release (beta)
+    # Prevents changesets action from creating a PR on forks
+    if: github.repository == 'alessbell/good-snow-tire-demo'
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -24,7 +25,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: 📥 Install deps (with cache)
+      - name: 📈 Install dependencies (with cache)
         uses: bahmutov/npm-install@v1
 
       - name: 🔐 Setup npm auth
@@ -44,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      - name: Send a Slack notification on publish 🚀
+      - name: 🤖 Send a Slack notification on Publish
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "Send message to Slack"

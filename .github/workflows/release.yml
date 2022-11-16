@@ -9,7 +9,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: 🦋 Changesets Release
+    name: 🪄 Changesets Release
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: 📥 Install deps (with cache)
+      - name: 📈 Install dependencies (with cache)
         uses: bahmutov/npm-install@v1
 
       - name: 🚀 Create Release PR or Publish to npm + GitHub
@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      - name: Send a Slack notification on publish 🚀
+      - name: 🤖 Send a Slack notification on Publish
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "Send message to Slack"
