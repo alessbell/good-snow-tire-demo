@@ -1,5 +1,15 @@
 # good-snow-tire-demo
 
+## 1.2.0
+
+### Minor Changes
+
+- [#26](https://github.com/alessbell/good-snow-tire-demo/pull/26) [`99904e6`](https://github.com/alessbell/good-snow-tire-demo/commit/99904e64d2fb1b67ea69d374737567e3877d5fcc) Thanks [@alessbell](https://github.com/alessbell)! - Adds division function
+
+### Patch Changes
+
+- [#26](https://github.com/alessbell/good-snow-tire-demo/pull/26) [`99904e6`](https://github.com/alessbell/good-snow-tire-demo/commit/99904e64d2fb1b67ea69d374737567e3877d5fcc) Thanks [@alessbell](https://github.com/alessbell)! - Adds logging inside of multiply
+
 ## 1.2.0-beta.1
 
 ### Patch Changes
