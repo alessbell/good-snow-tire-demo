@@ -36,6 +36,10 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: npm run release
+          version: npm run release:prerelease
+          commit: "chore: Update version for release"
+          title: "chore: Update version for release"
+          createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
