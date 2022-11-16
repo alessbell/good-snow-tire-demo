@@ -1,0 +1,48 @@
+name: 🍃 Changesets Exit Pre-Release Mode
+
+on: issue_comment
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  prerelease:
+    name: 🍃 Changesets Exit Pre-Release Mode
+    # Narrows scope to pull requests (ignores non-PR issues)
+    # HEAD commit message check skips if last commit already exited prerelease mode
+    # Ignores non-owner/admin comments
+    if: |
+      ${{
+        github.event.issue.pull_request &&
+        (github.event.issue.author_association == 'ADMIN' || github.event.issue.author_association == 'OWNER') &&
+        !contains(github.event.head_commit.message, 'Exit prerelease mode')
+      }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: 📈 Install dependencies (with cache)
+        uses: bahmutov/npm-install@v1
+
+      # - name: 🔐 Setup npm auth
+      #   run: |
+      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+
+      - name: 🍃 Exit prerelease mode
+        run: |
+          git config user.email 'github-actions[bot]@users.noreply.github.com' && \
+          git config user.name 'github-actions[bot]' && \
+          npx changeset pre exit && \
+          npx changeset version && \
+          git add . && \
+          git commit -m "Exit prerelease mode and version packages" && \
+          git push
+        

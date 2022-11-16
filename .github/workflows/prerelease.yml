@@ -10,8 +10,9 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   prerelease:
     name: 🦄 Changesets Pre-Release (beta)
-    # Prevents changesets action from creating a PR on forks
-    if: github.repository == 'alessbell/good-snow-tire-demo'
+    # Repository check prevents changesets action from creating a PR on forks
+    # HEAD commit message check skips if last commit was exiting prerelease mode
+    if: ${{ github.repository == 'alessbell/good-snow-tire-demo' && !contains(github.event.head_commit.message, 'Exit prerelease mode') }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -36,10 +37,10 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          version: npm run ci:version
           publish: npm run release
-          version: npm run release:prerelease
-          commit: "chore: Update version for release"
-          title: "chore: Update version for release"
+          commit: "chore: Update version for beta release"
+          title: "chore: Update version for beta release"
           createGithubReleases: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,3 +50,4 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "Send message to Slack"
+        
