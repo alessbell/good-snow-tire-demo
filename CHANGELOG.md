@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 0.3.0-next.1
+
+### Minor Changes
+
+- Add division function ([#15](https://github.com/alessbell/good-snow-tire-demo/pull/15))
+
 ## 0.3.0-next.0
 
 ### Minor Changes
