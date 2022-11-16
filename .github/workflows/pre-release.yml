@@ -1,4 +1,4 @@
-name: 🦋 Changesets Pre-Release (beta)
+name: 🦄 Changesets Pre-Release (beta)
 
 on:
   push:
@@ -10,7 +10,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: 🦋 Changesets Pre-Release (beta)
+    name: 🦄 Changesets Pre-Release (beta)
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
