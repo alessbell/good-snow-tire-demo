@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "good-snow-tire-demo": "0.2.1"
+  },
+  "changesets": [
+    "ten-flowers-begin"
+  ]
+}

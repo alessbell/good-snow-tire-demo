@@ -1,5 +1,25 @@
 # good-snow-tire-demo
 
+## 1.0.0-next.0
+
+### Major Changes
+
+- [#19](https://github.com/alessbell/good-snow-tire-demo/pull/19) [`1408e0b`](https://github.com/alessbell/good-snow-tire-demo/commit/1408e0b0ab2d6610df7e7649201b0ec3ddbced6e) Thanks [@alessbell](https://github.com/alessbell)! - BREAKING CHANGE: Remove addition function
+
+  This library's API will be taking a new direction: subtraction instead of addition.
+
+  Please update your imports from:
+
+  ```ts
+  import { sum, subtract } from '../src';
+  ```
+
+  to
+
+  ```ts
+  import { subtract } from '../src';
+  ```
+
 ## 0.2.1
 
 ### Patch Changes
