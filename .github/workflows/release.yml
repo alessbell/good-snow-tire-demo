@@ -30,6 +30,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          version: npm run ci:version
           publish: npm run release
           createGithubReleases: true
         env:

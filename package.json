@@ -15,7 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "ci:version": "npx changeset version && npm install && git add .",
     "release": "sh scripts/release.sh",
     "release:prerelease": "sh scripts/prerelease.sh"
   },
