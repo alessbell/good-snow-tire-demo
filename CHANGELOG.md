@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.1.0
+
+### Minor Changes
+
+- [#20](https://github.com/alessbell/good-snow-tire-demo/pull/20) [`62a5edd`](https://github.com/alessbell/good-snow-tire-demo/commit/62a5edd7e74e0df6780f3f1b15841bf16e04c1ff) Thanks [@alessbell](https://github.com/alessbell)! - Adds multiply function
+
 ## 1.1.0-beta.0
 
 ### Minor Changes
