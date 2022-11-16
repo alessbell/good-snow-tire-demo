@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@remix-run/changelog-github", {"repo": "alessbell/good-snow-tire-demo"}],
+  "changelog": ["@changesets/changelog-github", {"repo": "alessbell/good-snow-tire-demo"}],
   "commit": false,
   "fixed": [],
   "linked": [],
