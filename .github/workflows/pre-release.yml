@@ -1,15 +1,16 @@
-name: 🦋 Changesets Release
+name: 🦋 Changesets Pre-Release (beta)
 
 on:
   push:
     branches:
-      - main
+      - release
+      - "release-*"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: 🦋 Changesets Release
+    name: 🦋 Changesets Pre-Release (beta)
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -26,7 +27,11 @@ jobs:
       - name: 📥 Install deps (with cache)
         uses: bahmutov/npm-install@v1
 
-      - name: 🚀 Create Release PR or Publish to npm + GitHub
+      - name: 🔐 Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+
+      - name: 🚀 Publish Pre-Release to npm + GitHub
         id: changesets
         uses: changesets/action@v1
         with:
