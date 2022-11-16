@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.2.0-beta.1
+
+### Patch Changes
+
+- [#28](https://github.com/alessbell/good-snow-tire-demo/pull/28) [`d745d23`](https://github.com/alessbell/good-snow-tire-demo/commit/d745d23857306dff59ebafeda08364ff3fb4d77b) Thanks [@alessbell](https://github.com/alessbell)! - Adds logging inside of multiply
+
 ## 1.2.0-beta.0
 
 ### Minor Changes

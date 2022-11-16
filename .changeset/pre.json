@@ -5,6 +5,7 @@
     "good-snow-tire-demo": "1.1.0"
   },
   "changesets": [
+    "slimy-bananas-greet",
     "smooth-kangaroos-thank"
   ]
 }
