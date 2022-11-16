@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 0.3.0-next.0
+
+### Minor Changes
+
+- Adds multiplication function ([#12](https://github.com/alessbell/good-snow-tire-demo/pull/12))
+
 ## 0.2.1
 
 ### Patch Changes
