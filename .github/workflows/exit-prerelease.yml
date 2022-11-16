@@ -21,8 +21,14 @@ jobs:
       - name: 🛑 Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
 
+      - name: 🎋 Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
+
       - name: ⬇️ Checkout Repo
         uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.branch-name.outputs.current_branch }}
 
       - name: ⎔ Setup Node.js 18.x
         uses: actions/setup-node@v2
