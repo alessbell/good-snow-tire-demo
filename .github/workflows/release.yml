@@ -18,10 +18,10 @@ jobs:
       - name: ⬇️ Checkout Repo
         uses: actions/checkout@v2
 
-      - name: ⎔ Setup Node.js 18.x
+      - name: ⎔ Setup Node.js 19.x
         uses: actions/setup-node@v2
         with:
-          node-version: 18.x
+          node-version: 19.x
 
       - name: 📈 Install dependencies (with cache)
         uses: bahmutov/npm-install@v1
