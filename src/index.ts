@@ -6,6 +6,9 @@ export const subtract = (a: number, b: number) => {
 };
 
 export const multiply = (a: number, b: number) => {
+  if ('development' === process.env.NODE_ENV) {
+    console.log('multiplying');
+  }
   return a * b;
 };
 
