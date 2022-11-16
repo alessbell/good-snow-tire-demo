@@ -7,5 +7,10 @@
   || echo 'Already in pre mode'
 
 npx changeset version
-git add .
-git commit -m "chore: version prerelease packages"
+
+if [[ $(git diff --stat) != '' ]]; then
+  git add .
+  git commit -m "chore: version prerelease packages"
+else
+  echo 'Branch is clean, nothing to commit'
+fi
