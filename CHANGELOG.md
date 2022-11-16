@@ -1,5 +1,25 @@
 # good-snow-tire-demo
 
+## 1.0.0-next.2
+
+### Major Changes
+
+- Deprecate add function ([#17](https://github.com/alessbell/good-snow-tire-demo/pull/17))
+
+  In our first major release, `good-snow-tire-demo` is removing the `add` function.
+
+  This means that imports that look like this
+
+  ```js
+  import { add, subtract, multiply, divide } from '../src';
+  ```
+
+  should be updated to reflect this change:
+
+  ```js
+  import { subtract, multiply, divide } from '../src';
+  ```
+
 ## 0.3.0-next.1
 
 ### Minor Changes
