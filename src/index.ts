@@ -15,3 +15,7 @@ export const multiply = (a: number, b: number) => {
 export const divide = (a: number, b: number) => {
   return a / b;
 };
+
+export const returnFoo = () => {
+  return 'foo';
+};
