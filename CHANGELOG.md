@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.3.0-beta.0
+
+### Minor Changes
+
+- [#31](https://github.com/alessbell/good-snow-tire-demo/pull/31) [`e141b7e`](https://github.com/alessbell/good-snow-tire-demo/commit/e141b7ee912e20e8e1e3ab9c58312b03430b3471) Thanks [@alessbell](https://github.com/alessbell)! - Adds returnFoo function
+
 ## 1.2.0
 
 ### Minor Changes
