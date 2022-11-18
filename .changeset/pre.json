@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "good-snow-tire-demo": "1.2.0"
+  },
+  "changesets": [
+    "large-oranges-tap"
+  ]
+}
