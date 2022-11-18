@@ -1,4 +1,4 @@
-name: 🪄 Changesets Release
+name: Release
 
 on:
   push:
@@ -10,13 +10,13 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: 🪄 Changesets Release
+    name: Changesets Release
     runs-on: ubuntu-latest
     steps:
-      - name: 🛑 Cancel Previous Runs
+      - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.11.0
 
-      - name: ⬇️ Checkout Repo
+      - name: Checkout Repo
         uses: actions/checkout@v2
 
       - name: ⎔ Setup Node.js 18.x
@@ -24,13 +24,22 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: 📈 Install dependencies (with cache)
+      - name: Install dependencies (with cache)
         uses: bahmutov/npm-install@v1
 
       - name: Build
         run: npm run build
 
-      - name: 🚀 Create Release PR or Publish to npm + GitHub
+      - name: Enter Prerelease mode if on release branch
+        if: ${{ github.ref != 'refs/heads/main' }}
+        # if .changeset/pre.json does not exist, enter
+        # prerelease mode with tag beta
+        run: |
+          [ ! -f .changeset/pre.json ] \
+            && npx changeset pre enter beta \
+            || echo 'Already in pre mode'
+
+      - name: Create Release PR or Publish to npm + GitHub
         id: changesets
         uses: changesets/action@v1
         with:
@@ -41,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      - name: 🤖 Send a Slack notification on Publish
+      - name: Send a Slack notification on Publish
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "Send message to Slack"
