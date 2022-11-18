@@ -52,7 +52,6 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com' && \
           git config user.name 'github-actions[bot]' && \
           npx changeset pre exit && \
-          npm i && \
           git add . && \
           git commit -m "Exit prerelease mode" && \
           git push
