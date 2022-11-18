@@ -15,8 +15,6 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "ci:version": "npx changeset version && npm install && git add .",
-    "release": "npm run build && npx changeset publish",
     "release:prerelease": "sh scripts/prerelease.sh"
   },
   "husky": {
