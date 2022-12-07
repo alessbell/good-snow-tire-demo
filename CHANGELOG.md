@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.3.0
+
+### Minor Changes
+
+- [`221b57a`](https://github.com/alessbell/good-snow-tire-demo/commit/221b57ac46d3d8c8c4a3f559995dcfb4ec7ca540) Thanks [@alessbell](https://github.com/alessbell)! - Adds addition
+
 ## 1.2.0
 
 ### Minor Changes
