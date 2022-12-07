@@ -35,7 +35,7 @@ jobs:
 
       - name: Write to package.json
         id: info
-        uses: jaywcjlove/github-action-package@main@v1.3.0
+        uses: jaywcjlove/github-action-package@v1.3.0
         with:
           data: |
             {
