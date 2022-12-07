@@ -61,10 +61,10 @@ jobs:
         run: |
           echo '${{ steps.changesets.outputs }}'
 
-      - name: Publish
-        if: steps.changesets.outputs.hasChangesets == 'true'
-        # You can do something when a publish should happen.
-        run: yarn publish
+      # - name: Publish
+      #   if: steps.changesets.outputs.hasChangesets == 'true'
+      #   # You can do something when a publish should happen.
+      #   run: yarn publish
 
       # - name: Create Release PR or Publish to npm + GitHub
       #   id: changesets
