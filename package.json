@@ -15,10 +15,6 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-<<<<<<< Updated upstream
-    "release:prerelease": "sh scripts/prerelease.sh",
-=======
->>>>>>> Stashed changes
     "changeset-publish": "npm run build && changeset publish",
     "changeset-check": "changeset status --verbose --since=origin/main",
     "changeset-version": "changeset version && npm i"
