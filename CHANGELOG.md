@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.4.0-alpha.1
+
+### Minor Changes
+
+- [#52](https://github.com/alessbell/good-snow-tire-demo/pull/52) [`9074ac6`](https://github.com/alessbell/good-snow-tire-demo/commit/9074ac6d1a9ae0ed7f7cab6c18276cea019ed379) Thanks [@alessbell](https://github.com/alessbell)! - Remove squared function
+
 ## 1.4.0-alpha.0
 
 ### Minor Changes
