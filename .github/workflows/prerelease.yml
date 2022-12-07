@@ -62,7 +62,8 @@ jobs:
 
       - name: File exists
         # Only run publish if we're still in pre mode
-        if: steps.check_files.outputs.files_exists == 'true' && ${{ contains(github.event.head_commit.message, 'Version Packages') }}
+        # and if we've just merged a Version Packages PR
+        if: ${{ steps.check_files.outputs.files_exists == 'true' && startsWith(github.event.head_commit.message, 'Version Packages')}}
         run: npm run changeset-publish
 
       # - name: Publish

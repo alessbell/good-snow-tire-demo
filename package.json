@@ -17,6 +17,7 @@
     "lint": "tsdx lint",
     "release:prerelease": "sh scripts/prerelease.sh",
     "changeset-publish": "npm run build && changeset publish",
+    "changeset-publish-next": "npm run build && changeset publish --tag next",
     "changeset-check": "changeset status --verbose --since=origin/main",
     "changeset-version": "changeset version && npm i"
   },
