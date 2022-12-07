@@ -18,9 +18,11 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - name: ⎔ Setup Node.js 18.x
         uses: actions/setup-node@v2
@@ -45,4 +47,3 @@ jobs:
 
       - name: Commit and push changes
         run: git add -A && git commit -m "Exit prerelease mode" && git push
-        
