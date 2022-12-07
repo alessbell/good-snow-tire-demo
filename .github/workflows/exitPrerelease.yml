@@ -1,0 +1,48 @@
+name: Exit Prerelease
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-branch:
+        description: 'Exit prerelease mode on branch'
+        type: string
+        default: 'release-'
+        required: true
+
+jobs:
+  deploy:
+    name: Exit prerelease
+    runs-on: ubuntu-latest
+    # Allow GITHUB_TOKEN to have write permissions
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+
+      - name: ⎔ Setup Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+
+      - name: Get Previous tag
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
+      - name: Write to package.json
+        id: info
+        uses: "jaywcjlove/github-action-package@main@v1.3.0"
+        with:
+          data: |
+            {
+              "version": "${{ steps.previoustag.outputs.tag }}"
+            }
+
+      - name: Remove pre.json
+        run: npx rimraf .changeset/pre.json
+
+      - name: Commit and push changes
+        run: git add -A && git commit -m "Exit prerelease mode" && git push
+        
