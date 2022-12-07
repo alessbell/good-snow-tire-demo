@@ -15,7 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "release:prerelease": "sh scripts/prerelease.sh",
+    "changeset-pre-exit": "changeset pre exit",
     "changeset-publish": "npm run build && changeset publish",
     "changeset-publish-next": "npm run build && changeset publish --tag next",
     "changeset-check": "changeset status --verbose --since=origin/main",
