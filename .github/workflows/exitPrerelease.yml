@@ -50,5 +50,4 @@ jobs:
       - name: Remove pre.json
         run: npx rimraf .changeset/pre.json
 
-      - name: Commit and push changes
-        run: git add -A && git commit -m "Exit prerelease mode" && git push
+      - uses: stefanzweifel/git-auto-commit-action@v4
