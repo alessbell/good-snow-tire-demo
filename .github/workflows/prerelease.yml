@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - "release-*"
+      - 'release-*'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -37,17 +37,14 @@ jobs:
       - name: Install dependencies (with cache)
         uses: bahmutov/npm-install@v1
 
-      # - name: Build
-      #   run: npm run build
-
       - name: Enter Prerelease mode if on release branch
         # if: ${{ github.ref != 'refs/heads/main' }}
         # if .changeset/pre.json does not exist, enter
         # prerelease mode with tag alpha
         run: |
-          [ ! -f .changeset/pre.json ] \
+          [ ! -f .changeset/pre.json && !contains(github.event.head_commit.message, 'Exit prerelease') ] \
             && npx changeset pre enter alpha \
-            || echo 'Already in pre mode'
+            || echo 'Already in pre mode or exited pre mode by most recent commit'
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -61,10 +58,12 @@ jobs:
         run: |
           echo '${{ steps.changesets.outputs }}'
 
-      # - name: Publish
-      #   if: steps.changesets.outputs.hasChangesets == 'true'
-      #   # You can do something when a publish should happen.
-      #   run: yarn publish
+      - name: Publish
+        # if: steps.changesets.outputs.hasChangesets == 'true'
+        if: '! test -f .changeset/pre.json'
+        # if: [ ! -f .changeset/pre.json ]
+        # You can do something when a publish should happen.
+        run: npm run changeset-publish
 
       # - name: Create Release PR or Publish to npm + GitHub
       #   id: changesets
@@ -76,9 +75,8 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Send a Slack notification on Publish
         if: steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "Send message to Slack"
-        
