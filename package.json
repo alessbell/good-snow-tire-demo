@@ -15,7 +15,10 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
-    "release:prerelease": "sh scripts/prerelease.sh"
+    "release:prerelease": "sh scripts/prerelease.sh",
+    "changeset-publish": "npm run build && changeset publish",
+    "changeset-check": "changeset status --verbose --since=origin/main",
+    "changeset-version": "changeset version && npm i"
   },
   "husky": {
     "hooks": {
