@@ -5,6 +5,7 @@
     "good-snow-tire-demo": "1.3.0"
   },
   "changesets": [
+    "modern-papayas-shake",
     "old-ties-fry"
   ]
 }
