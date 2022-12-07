@@ -42,7 +42,7 @@ jobs:
         # if .changeset/pre.json does not exist, enter
         # prerelease mode with tag alpha
         run: |
-          [ ! -f .changeset/pre.json && !contains(github.event.head_commit.message, 'Exit prerelease') ] \
+          [ ! -f .changeset/pre.json && ${{ !contains(github.event.head_commit.message, 'Exit prerelease') }} ] \
             && npx changeset pre enter alpha \
             || echo 'Already in pre mode or exited pre mode by most recent commit'
 
@@ -54,16 +54,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Echo
-        run: |
-          echo '${{ steps.changesets.outputs }}'
+      - name: File Existence
+        uses: andstor/file-existence-action@v2.0.0
+        with:
+          files: ".changeset/pre.json"
 
-      - name: Publish
-        # if: steps.changesets.outputs.hasChangesets == 'true'
-        if: '! test -f .changeset/pre.json'
-        # if: [ ! -f .changeset/pre.json ]
-        # You can do something when a publish should happen.
+      - name: File exists
+        # Only run publish if we're still in pre mode
+        if: steps.check_files.outputs.files_exists == 'true'
         run: npm run changeset-publish
+
+      # - name: Publish
+      #   # if: steps.changesets.outputs.hasChangesets == 'true'
+      #   # if: '! test -f .changeset/pre.json'
+      #   if: '[ ! -f .changeset/pre.json ]'
+      #   # You can do something when a publish should happen.
+      #   run: npm run changeset-publish
 
       # - name: Create Release PR or Publish to npm + GitHub
       #   id: changesets
