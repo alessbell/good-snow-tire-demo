@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "good-snow-tire-demo": "1.3.0"
+  },
+  "changesets": [
+    "old-ties-fry"
+  ]
+}
