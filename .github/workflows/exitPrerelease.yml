@@ -33,14 +33,19 @@ jobs:
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@v1
 
+      - name: Run find-and-replace to remove 'v'
+        uses: mad9000/actions-find-and-replace-string@1
+        id: formatversion
+        with:
+          source: ${{ steps.previoustag.outputs.tag }}
+          find: 'v'
+          replace: ''
+
       - name: Write to package.json
         id: info
         uses: jaywcjlove/github-action-package@v1.3.0
         with:
-          data: |
-            {
-              "version": "${{ steps.previoustag.outputs.tag }}"
-            }
+          version: ${{ steps.formatversion.outputs.value }}
 
       - name: Remove pre.json
         run: npx rimraf .changeset/pre.json
