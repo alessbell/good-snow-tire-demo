@@ -46,9 +46,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
-      - name: Send a Slack notification on Publish
-        if: steps.changesets.outputs.published == 'true'
+
+      - name: Echo values from previous step
+        # if: steps.changesets.outcome == 'success' && steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
-        run: echo "Send message to Slack"
+        run: echo "${{steps.changesets.outcome}} ${{steps.changesets.outputs.published}} v${{ fromJson(steps.changesets.outputs.publishedPackages)[0].version }}"
+
+      - name: Send a Slack notification on Publish
+        if: steps.changesets.outcome == 'success' && steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: echo "v${{ fromJson(steps.changesets.outputs.publishedPackages)[0].version }}"
         
