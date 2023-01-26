@@ -1,0 +1,52 @@
+name: Comment
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  release_next:
+    name: release:next
+    runs-on: ubuntu-latest
+
+    if: |
+      github.event.issue.pull_request &&
+      github.event.sender.login == 'alessbell' &&
+      startsWith(github.event.comment.body, '/release:pr')
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.issue.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies (with cache)
+        uses: bahmutov/npm-install@v1
+
+      # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
+      - name: Release to pr-${{ github.event.issue.number }} tag
+        run: |
+          npx changeset version --snapshot pr-${{ github.event.issue.number }} && npm i
+          npm run build
+          npx changeset publish --no-git-tag --snapshot --tag pr-${{ github.event.issue.number }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get released version
+        id: version
+        run: echo ::set-output name=version::$(node -p "require('./package.json').version")
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            A new release has been made for this pull request. You can install it with `npm i @apollo/client@pr-${{ github.event.issue.number }}`.
