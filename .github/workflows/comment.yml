@@ -16,10 +16,13 @@ jobs:
       startsWith(github.event.comment.body, '/release:pr')
 
     steps:
+      - uses: xt0rted/pull-request-comment-branch@v1
+        id: comment-branch
+
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.issue.pull_request.head.sha }}
+          ref: ${{ steps.comment-branch.outputs.head_ref }}
           fetch-depth: 0
 
       - name: Setup Node.js 18.x
@@ -49,4 +52,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            A new release has been made for this pull request. You can install it with `npm i @apollo/client@pr-${{ github.event.issue.number }}`.
+            A new release has been made for this pull request. You can install it with `npm i good-snow-tire-demo@pr-${{ github.event.issue.number }}`.
