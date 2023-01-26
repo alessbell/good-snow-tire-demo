@@ -48,8 +48,8 @@ jobs:
           npm run build
           npx changeset publish --no-git-tag --snapshot --tag pr-${{ github.event.issue.number }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Get released version
         id: version
