@@ -42,11 +42,11 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
-      - name: Release to pr-${{ github.event.issue.number }} tag
+      - name: Release to pr tag
         run: |
           npx changeset version --snapshot pr-${{ github.event.issue.number }} && npm i
           npm run build
-          npx changeset publish --no-git-tag --snapshot --tag pr-${{ github.event.issue.number }}
+          npx changeset publish --no-git-tag --snapshot --tag pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -60,4 +60,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            A new release has been made for this pull request. You can install it with `npm i good-snow-tire-demo@pr-${{ github.event.issue.number }}`.
+            A new release has been made for this pull request. You can install it with `npm i good-snow-tire-demo@${{ steps.version.outputs.version }}`.
