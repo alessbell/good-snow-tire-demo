@@ -83,7 +83,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Echo outcome
-        run: echo $:{{ steps.create-version.outcome }}
+        run: echo ${{ steps.create-version.outcome }}
 
       - name: Get released version
         if: steps.changesets.outcome == 'success'
