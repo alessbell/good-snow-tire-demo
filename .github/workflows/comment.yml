@@ -64,26 +64,15 @@ jobs:
         run: rm .changeset/pre.json
 
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
-      - name: Create snapshot version
-        id: create-version
-        run: npx changeset version --snapshot pr-${{ github.event.issue.number }}
-
-      - name: Install deps
-        run: npm i
-
-      - name: Build
-        run: npm run build
-
-      - name: Publish
+      - name: Create Release Pull Request or Publish to npm
         id: changesets
-        if: steps.create-version.outcome == 'success'
-        run: npx changeset publish --no-git-tag --snapshot --tag pr
+        uses: changesets/action@v1
+        with:
+          version: npx changeset version --snapshot pr-${{ github.event.issue.number }} && npm i
+          publish: npm run build && npx changeset publish --no-git-tag --snapshot --tag pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Echo outcome
-        run: echo ${{ steps.create-version.outcome }}
 
       - name: Get released version
         if: steps.changesets.outcome == 'success'
@@ -97,3 +86,12 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             A new release has been made for this pull request. You can install it with `npm i good-snow-tire-demo@${{ steps.version.outputs.version }}`.
+
+      - name: Create comment
+        if: steps.changesets.outcome != 'success'
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: Please add a changeset to this PR before attempting a snapshot release.
+
+
