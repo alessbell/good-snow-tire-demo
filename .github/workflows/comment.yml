@@ -50,7 +50,7 @@ jobs:
 
       - name: Check for pre.json file existence
         id: check_files
-        uses: andstor/file-existence-action@v2.0.0
+        uses: andstor/file-existence-action@v2
         with:
           files: ".changeset/pre.json"
 
@@ -63,8 +63,15 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: rm .changeset/pre.json
 
+      - name: Check changeset(s) existence
+        id: changesets_exist
+        uses: andstor/file-existence-action@v2
+        with:
+          files: ".changeset/*.md"
+
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
       - name: Create Release Pull Request or Publish to npm
+        if: steps.changesets_exist.outputs.files_exists == 'true'
         id: changesets
         uses: changesets/action@v1
         with:
