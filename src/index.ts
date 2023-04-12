@@ -23,3 +23,7 @@ export const add = (a: number, b: number) => {
 export const exponent = (a: number, b: number) => {
   return Math.pow(a, b);
 };
+
+export const powerOf3 = (a: number) => {
+  return Math.pow(a, 3);
+};
