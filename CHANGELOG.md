@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.6.0-alpha.0
+
+### Minor Changes
+
+- [#69](https://github.com/alessbell/good-snow-tire-demo/pull/69) [`b825971`](https://github.com/alessbell/good-snow-tire-demo/commit/b82597125e1ee189167a7e5a32f2a1815b52b93a) Thanks [@alessbell](https://github.com/alessbell)! - Adds exponent function
+
 ## 1.5.0
 
 ### Minor Changes
