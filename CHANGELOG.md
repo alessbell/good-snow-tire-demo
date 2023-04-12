@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.7.0-beta.1
+
+### Patch Changes
+
+- [#69](https://github.com/alessbell/good-snow-tire-demo/pull/69) [`5de47b1`](https://github.com/alessbell/good-snow-tire-demo/commit/5de47b157cb54c15aee17bca5709486e0e1b5f47) Thanks [@alessbell](https://github.com/alessbell)! - Bump version.
+
 ## 1.7.0-beta.0
 
 ### Minor Changes
