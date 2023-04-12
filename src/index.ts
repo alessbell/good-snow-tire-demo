@@ -24,6 +24,10 @@ export const exponent = (a: number, b: number) => {
   return Math.pow(a, b);
 };
 
+export const powerOf2 = (a: number) => {
+  return Math.pow(a, 2);
+};
+
 export const powerOf3 = (a: number) => {
   return Math.pow(a, 3);
 };
