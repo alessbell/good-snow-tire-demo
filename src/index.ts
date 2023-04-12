@@ -19,3 +19,7 @@ export const divide = (a: number, b: number) => {
 export const add = (a: number, b: number) => {
   return a + b;
 };
+
+export const exponent = (a: number, b: number) => {
+  return Math.pow(a, b);
+};
