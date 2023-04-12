@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.6.0-alpha.1
+
+### Minor Changes
+
+- [#69](https://github.com/alessbell/good-snow-tire-demo/pull/69) [`68ef3a5`](https://github.com/alessbell/good-snow-tire-demo/commit/68ef3a5620f6c1e0be1fe42b846ccdd19df70fec) Thanks [@alessbell](https://github.com/alessbell)! - add powerOf3 function
+
 ## 1.6.0-alpha.0
 
 ### Minor Changes
