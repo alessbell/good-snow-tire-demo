@@ -1,5 +1,11 @@
 # good-snow-tire-demo
 
+## 1.7.0-beta.0
+
+### Minor Changes
+
+- [#69](https://github.com/alessbell/good-snow-tire-demo/pull/69) [`e7c49ee`](https://github.com/alessbell/good-snow-tire-demo/commit/e7c49ee76bcddc76996d7c724ac2f8b6979cffc6) Thanks [@alessbell](https://github.com/alessbell)! - Add powerOf2 fn
+
 ## 1.6.0-alpha.1
 
 ### Minor Changes
