@@ -11,6 +11,9 @@ jobs:
   release:
     name: Changesets Release
     runs-on: ubuntu-latest
+    # permissions:
+    #   contents: read
+    #   id-token: write
     steps:
       # - name: Cancel Previous Runs
       #   uses: styfle/cancel-workflow-action@0.11.0
@@ -24,6 +27,7 @@ jobs:
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
+            provenance=true
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
         env:
@@ -56,4 +60,3 @@ jobs:
         if: steps.changesets.outcome == 'success' && steps.changesets.outputs.published == 'true'
         # You can do something when a publish happens.
         run: echo "v${{ fromJson(steps.changesets.outputs.publishedPackages)[0].version }}"
-        
