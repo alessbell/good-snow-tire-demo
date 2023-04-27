@@ -10,6 +10,10 @@
   "engines": {
     "node": ">=14"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alessbell/good-snow-tire-demo"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
