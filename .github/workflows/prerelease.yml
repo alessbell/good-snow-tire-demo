@@ -1,4 +1,4 @@
-name: Release
+name: Pre-Release
 
 on:
   push:
@@ -58,7 +58,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v2.0.0
         with:
-          files: ".changeset/pre.json"
+          files: '.changeset/pre.json'
 
       - name: File exists
         # Only run publish if we're still in pre mode
