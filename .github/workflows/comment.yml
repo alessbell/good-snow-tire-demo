@@ -25,12 +25,18 @@ jobs:
 
       - name: Checkout head ref
         uses: actions/checkout@v3
+        id: added-files
         with:
           ## specify the owner + repository in order to checkout the fork
           ## for community PRs
           repository: ${{ steps.comment-branch.outputs.head_owner }}/${{ steps.comment-branch.outputs.head_repo }}
           ref: ${{ steps.comment-branch.outputs.head_ref }}
           fetch-depth: 0
+        run: |
+          echo "changesets=$(git diff --name-only --diff-filter=A ${{ steps.comment-branch.outputs.base_sha }} ${{ steps.comment-branch.outputs.head_sha }} | grep `\.changeset\/.+\.md$` | xargs)"
+
+      - name: Echo added files
+        run: echo "${{ steps.added-files.outputs.changesets }}"
 
       - name: Creating .npmrc
         run: |
@@ -52,7 +58,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v2
         with:
-          files: ".changeset/pre.json"
+          files: '.changeset/pre.json'
 
       - name: Exit pre mode if pre.json exists
         id: exit-pre-mode
@@ -62,12 +68,6 @@ jobs:
         # in pre mode)
         if: steps.check_files.outputs.files_exists == 'true'
         run: rm .changeset/pre.json
-
-      - name: Check changeset(s) existence
-        id: changesets_exist
-        uses: andstor/file-existence-action@v2
-        with:
-          files: ".changeset/*.md"
 
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
       - name: Create Release Pull Request or Publish to npm
@@ -84,7 +84,7 @@ jobs:
       - name: Get released version
         if: steps.changesets.outcome == 'success'
         id: version
-        run: echo ::set-output name=version::$(node -p "require('./package.json').version")
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
       - name: Create comment
         if: steps.changesets.outcome == 'success'
@@ -100,5 +100,3 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: Please add a changeset to this PR before attempting a snapshot release.
-
-
