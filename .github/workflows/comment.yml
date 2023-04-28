@@ -35,7 +35,7 @@ jobs:
       - name: Detect new changesets
         id: added-files
         run: |
-          echo "changesets=$(git diff --name-only --diff-filter=A ${{ steps.comment-branch.outputs.base_sha }} ${{ steps.comment-branch.outputs.head_sha }} | grep `\.changeset\/.+\.md$` | xargs)"
+          echo "changesets=$(git diff --name-only --diff-filter=A ${{ steps.comment-branch.outputs.base_sha }} ${{ steps.comment-branch.outputs.head_sha }} .changeset/*.md)"
 
       - name: Echo added files
         run: echo "${{ steps.added-files.outputs.changesets }}"
