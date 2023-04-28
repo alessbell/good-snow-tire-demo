@@ -80,13 +80,10 @@ jobs:
             Please add a changeset via `npx changeset` before attempting a snapshot release.
 
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
-      - name: Create Release Pull Request or Publish to npm
-        if: ${{ steps.added-files.outputs.changesets != '' }}
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          version: npx changeset version --snapshot pr-${{ github.event.issue.number }} && npm i
-          publish: npm run build && npx changeset publish --no-git-tag --snapshot --tag pr
+      - name: Release to pr tag
+        run: |
+          npx changeset version --snapshot pr-${{ github.event.issue.number }} && npm i
+          npm run build && npx changeset publish --no-git-tag --snapshot --tag pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
