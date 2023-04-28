@@ -71,9 +71,17 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: rm .changeset/pre.json
 
+      - name: Add comment if no changeset exists
+        if: steps.added-files.outputs.changesets == ""
+        uses: peter-evans/create-or-update-comment@v2.1.0
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            No changeset was detected while attempting a snapshot release; please add a markdown file via `npx changeset`.
+
       # https://github.com/atlassian/changesets/blob/master/docs/snapshot-releases.md
       - name: Create Release Pull Request or Publish to npm
-        if: steps.changesets_exist.outputs.files_exists == 'true'
+        if: steps.added-files.outputs.changesets != ""
         id: changesets
         uses: changesets/action@v1
         with:
