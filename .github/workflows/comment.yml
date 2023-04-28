@@ -103,10 +103,3 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             A new release has been made for this pull request. You can install it with `npm i good-snow-tire-demo@${{ steps.version.outputs.version }}`.
-
-      - name: Create comment
-        if: steps.changesets.outcome != 'success'
-        uses: peter-evans/create-or-update-comment@v2.1.0
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: Please add a changeset to this PR before attempting a snapshot release.
