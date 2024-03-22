@@ -52,8 +52,8 @@ jobs:
 
       - run: echo ${{steps.changesets-array.outputs.prop}}
 
-      - if: ${{steps.changesets-array.outputs.prop}} != '[]'
-        run: echo "Array is empty"
+      - if: ${{steps.changesets-array.outputs.prop}} != []
+        run: echo "Array has changesets"
 
       - run: |
           echo ${{steps.changesets-array.outputs.prop}}
