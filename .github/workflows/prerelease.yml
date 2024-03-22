@@ -55,7 +55,6 @@ jobs:
         run: |
           echo ${{steps.changesets-array.outputs.prop}}
           arrayLength=$(echo ${{steps.changesets-array.outputs.prop}} | jq '. | length')
-          echo "Number of changesets: $length"
           echo "length=$arrayLength" >> "$GITHUB_OUTPUT"
 
       - name: do something
