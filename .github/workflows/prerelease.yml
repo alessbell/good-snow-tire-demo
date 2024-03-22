@@ -50,7 +50,7 @@ jobs:
           path: ".changeset/pre.json"
           prop_path: "changesets"
 
-      - if: ${{steps.changesets-array.outputs.prop}} != '[]'
+      - if: steps.changesets-array.outputs.prop != '[]'
         run: echo "Array is empty"
 
       - run: |
