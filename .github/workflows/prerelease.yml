@@ -50,15 +50,17 @@ jobs:
           path: ".changeset/pre.json"
           prop_path: "changesets"
 
-      - run: echo ${{steps.changesets-array.outputs.prop}}
-
-      - if: ${{steps.changesets-array.outputs.prop}} != []
-        run: echo "Array has changesets"
-
-      - run: |
+      - name: Use jq to parse number of prerelease changesets
+        id: number-of-changesets
+        run: |
           echo ${{steps.changesets-array.outputs.prop}}
-          length=$(echo ${{steps.changesets-array.outputs.prop}} | jq '. | length')
+          arrayLength=$(echo ${{steps.changesets-array.outputs.prop}} | jq '. | length')
           echo "Number of changesets: $length"
+          echo "length=$arrayLength" >> "$GITHUB_OUTPUT"
+
+      - name: do something
+        if: ${{ steps.number-of-changesets.outputs.length > 0 }}
+        run: echo "We have prerelease changesets!"
 
       # - name: Create Release Pull Request or Publish to npm
       #   id: changesets
