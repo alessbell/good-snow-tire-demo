@@ -12,9 +12,6 @@ jobs:
     name: Changesets Release
     runs-on: ubuntu-latest
     steps:
-      # - name: Cancel Previous Runs
-      #   uses: styfle/cancel-workflow-action@0.11.0
-
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
@@ -46,45 +43,60 @@ jobs:
             && npx changeset pre enter alpha \
             || echo 'Already in pre mode or exited pre mode by most recent commit'
 
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
+      - name: Get prerelease changesets
+        id: changesets-array
+        uses: notiz-dev/github-action-json-property@release
         with:
-          version: npm run changeset-version
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: ".changeset/pre.json"
+          prop_path: "changesets"
 
-      - name: File Existence
-        id: check_files
-        uses: andstor/file-existence-action@v2.0.0
-        with:
-          files: '.changeset/pre.json'
+      - if: ${{steps.changesets-array.outputs.prop}} != '[]'
+        run: echo "Array is empty"
 
-      - name: File exists
-        # Only run publish if we're still in pre mode
-        # and if we've just merged a Version Packages PR
-        if: ${{ steps.check_files.outputs.files_exists == 'true' && startsWith(github.event.head_commit.message, 'Version Packages')}}
-        run: npm run changeset-publish
+      - run: |
+          echo ${{steps.changesets-array.outputs.prop}}
+          length=$(echo ${{steps.changesets-array.outputs.prop}} | jq '. | length')
+          echo "Number of changesets: $length"
 
-      # - name: Publish
-      #   # if: steps.changesets.outputs.hasChangesets == 'true'
-      #   # if: '! test -f .changeset/pre.json'
-      #   if: '[ ! -f .changeset/pre.json ]'
-      #   # You can do something when a publish should happen.
-      #   run: npm run changeset-publish
-
-      # - name: Create Release PR or Publish to npm + GitHub
+      # - name: Create Release Pull Request or Publish to npm
       #   id: changesets
       #   uses: changesets/action@v1
       #   with:
-      #     version: npx changeset version && npm install
-      #     publish: npx changeset publish
-      #     createGithubReleases: ${{ github.ref == 'refs/heads/main' }}
+      #     version: npm run changeset-version
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Send a Slack notification on Publish
-        if: steps.changesets.outputs.published == 'true'
-        # You can do something when a publish happens.
-        run: echo "Send message to Slack"
+      # - name: File Existence
+      #   id: check_files
+      #   uses: andstor/file-existence-action@v2.0.0
+      #   with:
+      #     files: '.changeset/pre.json'
+
+      # - name: File exists
+      #   # Only run publish if we're still in pre mode
+      #   # and if we've just merged a Version Packages PR
+      #   if: ${{ steps.check_files.outputs.files_exists == 'true' && startsWith(github.event.head_commit.message, 'Version Packages')}}
+      #   run: npm run changeset-publish
+
+      # # - name: Publish
+      # #   # if: steps.changesets.outputs.hasChangesets == 'true'
+      # #   # if: '! test -f .changeset/pre.json'
+      # #   if: '[ ! -f .changeset/pre.json ]'
+      # #   # You can do something when a publish should happen.
+      # #   run: npm run changeset-publish
+
+      # # - name: Create Release PR or Publish to npm + GitHub
+      # #   id: changesets
+      # #   uses: changesets/action@v1
+      # #   with:
+      # #     version: npx changeset version && npm install
+      # #     publish: npx changeset publish
+      # #     createGithubReleases: ${{ github.ref == 'refs/heads/main' }}
+      # #   env:
+      # #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # - name: Send a Slack notification on Publish
+      #   if: steps.changesets.outputs.published == 'true'
+      #   # You can do something when a publish happens.
+      #   run: echo "Send message to Slack"
