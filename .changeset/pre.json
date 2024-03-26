@@ -4,5 +4,8 @@
   "initialVersions": {
     "good-snow-tire-demo": "1.5.2"
   },
-  "changesets": []
+  "changesets": [
+    "flat-items-compare",
+    "plenty-ties-perform"
+  ]
 }
