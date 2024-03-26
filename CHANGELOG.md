@@ -1,5 +1,13 @@
 # good-snow-tire-demo
 
+## 1.5.3-alpha.0
+
+### Patch Changes
+
+- [`fb359e6`](https://github.com/alessbell/good-snow-tire-demo/commit/fb359e6a86004566627d3f8f677fc4f8b690e37e) Thanks [@alessbell](https://github.com/alessbell)! - Foo bar
+
+* [#78](https://github.com/alessbell/good-snow-tire-demo/pull/78) [`5cf0c42`](https://github.com/alessbell/good-snow-tire-demo/commit/5cf0c42b0af5007823cf8c073f2fd46578e8e722) Thanks [@alessbell](https://github.com/alessbell)! - some code change
+
 ## 1.5.2
 
 ### Patch Changes
