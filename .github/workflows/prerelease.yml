@@ -54,11 +54,11 @@ jobs:
         id: number-of-changesets
         run: |
           echo ${{steps.changesets-array.outputs.prop}}
-          arrayLength=$(echo ${{steps.changesets-array.outputs.prop}} | jq '. | length')
+          arrayLength=$(echo '${{steps.changesets-array.outputs.prop}}' | jq '. | length')
           echo "length=$arrayLength" >> "$GITHUB_OUTPUT"
 
       - name: do something
-        if: ${{ steps.number-of-changesets.outputs.length > 0 }}
+        if: steps.number-of-changesets.outputs.length > 0
         run: echo "We have prerelease changesets!"
 
       # - name: Create Release Pull Request or Publish to npm
