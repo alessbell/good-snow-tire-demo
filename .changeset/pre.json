@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "good-snow-tire-demo": "1.5.2"
+  },
+  "changesets": [
+    "flat-items-compare",
+    "plenty-ties-perform"
+  ]
+}
