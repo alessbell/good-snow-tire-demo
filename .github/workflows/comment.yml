@@ -22,12 +22,12 @@ jobs:
       - name: Get sha
         id: parse-sha
         run: |
-          if ( ${{ steps.comment-branch.outputs.head_owner }} == "alessbell" ); then
+          if ( "${{ steps.comment-branch.outputs.head_owner }}" == "alessbell" ); then
             echo "sha<<${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
           else
             shaFromComment="$(echo '${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2)"
             echo $shaFromComment
-            echo "sha<<${shaFromComment}" >> "${GITHUB_OUTPUT}"
+            echo "sha=$shaFromComment" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Echo comment branch values
