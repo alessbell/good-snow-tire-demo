@@ -25,7 +25,7 @@ jobs:
           if ( "${{ steps.comment-branch.outputs.head_owner }}/${{ steps.comment-branch.outputs.head_repo }}" == "alessbell/good-snow-tire-demo" ); then
             echo "sha<<${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
           else
-            echo "sha<<'${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2}" >> "${GITHUB_OUTPUT}"
+            echo "sha<<'${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Echo comment branch values
