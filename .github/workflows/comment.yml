@@ -45,7 +45,7 @@ jobs:
           body: |
             Did you forget to add the sha? Please use `/release:pr <sha>`
 
-      - name: Maybe exit early
+      - name: Exit if unknown sha
         if: steps.parse-sha.outcome == 'failure'
         run: |
           exit 1
