@@ -22,7 +22,7 @@ jobs:
       - name: Get sha
         id: parse-sha
         run: |
-          if [ "${{ steps.comment-branch.outputs.head_owner }}" == "jerelmiller" ]; then
+          if [ "${{ steps.comment-branch.outputs.head_owner }}" == "alessbell" ]; then
             headSha="${{ steps.comment-branch.outputs.head_sha }}"
             echo $headSha
             echo "sha=${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
