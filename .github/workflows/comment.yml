@@ -28,11 +28,11 @@ jobs:
             echo $headSha
             echo "sha=${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
           else
-            shaFromComment="$(echo '${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2)"
+            shaFromComment="$(echo '${{ github.event.comment.body }}' | cut -w -f2)"
             echo $shaFromComment
             echo "sha=$shaFromComment" >> "${GITHUB_OUTPUT}"
 
-            if [ -z "${shaFromComment}" ]; then
+            if [ $shaFromComment == "/release:pr" ]; then
               exit 1
             fi
           fi
