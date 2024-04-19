@@ -23,7 +23,6 @@ jobs:
         id: parse-sha
         continue-on-error: true
         run: |
-          echo "${{ steps.comment-branch.outputs.head_repo }}"
           if [ "${{ steps.comment-branch.outputs.head_owner }}" == "alessbell" ]; then
             headSha="${{ steps.comment-branch.outputs.head_sha }}"
             echo $headSha
