@@ -28,7 +28,7 @@ jobs:
             echo $headSha
             echo "sha=${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
           else
-            shaFromComment="$(echo '${{ github.event.comment.body }}' | cut -w -f2)"
+            shaFromComment="$(echo '${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2)"
             echo $shaFromComment
             echo "sha=$shaFromComment" >> "${GITHUB_OUTPUT}"
 
@@ -38,7 +38,7 @@ jobs:
           fi
 
       - name: Create comment
-        if: steps.parse-sha.conclusion == 'failure'
+        if: steps.parse-sha.outcome == 'failure'
         uses: peter-evans/create-or-update-comment@v2.1.0
         with:
           issue-number: ${{ github.event.issue.number }}
