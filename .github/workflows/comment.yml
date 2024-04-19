@@ -12,7 +12,7 @@ jobs:
 
     if: |
       github.event.issue.pull_request &&
-      github.event.sender.login == 'alessbell' &&
+      (github.event.sender.login == 'alessbell' || github.event.sender.login == 'jerelmiller') &&
       startsWith(github.event.comment.body, '/release:pr')
 
     steps:
@@ -22,11 +22,10 @@ jobs:
       - name: Get sha
         id: parse-sha
         run: |
-          if [ "${{ steps.comment-branch.outputs.head_owner }}" == "alessbell" ]; then
-            # echo "sha=${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
-            shaFromComment="$(echo '${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2)"
-            echo $shaFromComment
-            echo "sha=$shaFromComment" >> "${GITHUB_OUTPUT}"
+          if [ "${{ steps.comment-branch.outputs.head_owner }}" == "jerelmiller" ]; then
+            headSha="${{ steps.comment-branch.outputs.head_sha }}"
+            echo $headSha
+            echo "sha=${{ steps.comment-branch.outputs.head_sha }}" >> "${GITHUB_OUTPUT}"
           else
             shaFromComment="$(echo '${{ github.event.comment.body }}' | tr -s ' ' | cut -d ' ' -f2)"
             echo $shaFromComment
